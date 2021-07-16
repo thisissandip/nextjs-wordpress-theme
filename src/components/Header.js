@@ -1,7 +1,6 @@
 import useWidth from '../customHooks/useWidth';
 import { useEffect } from 'react';
 import Link from 'next/link';
-import client from '../apollo-client';
 
 function Header({ menu }) {
 	const menuItems = menu.edges[0].node.menuItems.edges;
@@ -21,14 +20,14 @@ function Header({ menu }) {
 
 	useEffect(() => {
 		let menu = document.querySelector('#menu');
-		if (width > 640) {
-			menu.classList.remove('h-32');
+		if (width > 768) {
+			menu.classList.remove('h-40');
 		}
 	}, [width]);
 
 	const toggleMenu = () => {
 		let menu = document.querySelector('#menu');
-		menu.classList.toggle('h-32');
+		menu.classList.toggle('h-40');
 	};
 
 	return (

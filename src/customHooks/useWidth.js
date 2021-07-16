@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function useWidth() {
-	if (typeof window) {
+	if (typeof window === 'undefined') {
 		return [0, 0];
 	}
 
