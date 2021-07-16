@@ -3,9 +3,7 @@ import Layout from '../src/components/Layout';
 import Image from 'next/image';
 import { gql } from '@apollo/client';
 import client from '../src/apollo-client';
-import { GET_ALL_MENUS } from '../src/queries/getMenus';
-
-import Header from '../src/components/Header';
+import { GET_ALL_MENUS } from '../src/queries/get-menus';
 
 export default function Home({ primaryMenu, footerMenu, sitesettings }) {
 	return (

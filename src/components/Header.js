@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 
 function Header({ menu, title }) {
-	const menuItems = menu.edges[0].node.menuItems.edges;
-	const primaryMenuItems = menuItems.map((item) => item.node);
+	const menuItems = menu?.edges[0]?.node?.menuItems?.edges;
+	const primaryMenuItems = menuItems?.map((item) => item.node);
 
 	const [width] = useWidth();
 
@@ -42,9 +42,9 @@ function Header({ menu, title }) {
 					<ul
 						id='ulMenu'
 						className='flex flex-col duration-300 ease-out sm:transition-none mt-5 mx-4 md:flex-row md:items-center md:mx-0 md:ml-auto md:mt-0 md:pt-0 md:border-0'>
-						{primaryMenuItems.map((item) => (
-							<li className='cursor-pointer' key={item.menuItemId}>
-								<Link title={item.label} href={`${item.path}`}>
+						{primaryMenuItems?.map((item) => (
+							<li className='cursor-pointer' key={item?.menuItemId}>
+								<Link title={item.label} href={`${item?.path}`}>
 									<span className='md:p-2 lg:px-4 font-semibold block text-primary px-4 py-1'>{item.label}</span>
 								</Link>
 							</li>
