@@ -23,7 +23,7 @@ function SinglePage({ primaryMenu, footerMenu, sitesettings, pagedata }) {
 					</div>
 				</div>
 				<div
-					className='content md:max-w-3xl max-w-xl mx-auto px-5'
+					className='content md:max-w-3xl max-w-xl mx-auto px-5 mb-20'
 					dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pagedata?.content) }}></div>
 			</Layout>
 		</>
