@@ -2,14 +2,20 @@ import { gql } from '@apollo/client';
 import client from '../../src/apollo-client';
 
 function ProductDetails({ product }) {
-	console.log(product);
-	return <div>Product Detials: {product.name}</div>;
+	return (
+		<>
+			{' '}
+			<div>Product Detials: {product.name}</div>
+			<div>
+				Product Detials: <img src={product.image.mediaItemUrl} alt={product.image.title}></img>{' '}
+			</div>{' '}
+		</>
+	);
 }
 
 export default ProductDetails;
 
 export async function getStaticProps(context) {
-	console.log(context);
 	const { slug } = context.params;
 
 	const { data } = await client.query({
