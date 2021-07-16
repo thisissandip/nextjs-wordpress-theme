@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import Layout from '../src/components/Layout';
-import Image from 'next/image';
-import { gql } from '@apollo/client';
 import client from '../src/apollo-client';
 import { GET_ALL_MENUS } from '../src/queries/get-menus';
+import { isEmpty } from 'lodash';
 
 export default function Home({ primaryMenu, footerMenu, sitesettings }) {
 	return (
@@ -27,9 +26,16 @@ export default function Home({ primaryMenu, footerMenu, sitesettings }) {
 }
 
 export const getStaticProps = async () => {
-	const { data } = await client.query({
+	const { data, errors } = await client.query({
 		query: GET_ALL_MENUS,
 	});
+
+	//  data is null redirect to 404
+	if (isEmpty(data.primaryMenu) || isEmpty(data.footerMenu) || isEmpty(data.sitesettings) || errors) {
+		return {
+			notFound: true,
+		};
+	}
 
 	return {
 		props: {

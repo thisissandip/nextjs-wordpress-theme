@@ -23,7 +23,7 @@ function Header({ menu, title }) {
 	return (
 		<nav id='nav' className='bg-white border-0' role='navigation'>
 			<div className='container overflow-hidden mx-auto p-4 flex flex-wrap items-center md:flex-no-wrap'>
-				<div className='mr-4 md:mr-8'>
+				<div className='mr-4 md:mr-8 cursor-pointer '>
 					<Link href='/' rel='home'>
 						<span className='text-xl text-primary font-bold'>{title}</span>
 					</Link>

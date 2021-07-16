@@ -3,6 +3,9 @@ import client from '../src/apollo-client';
 import { GET_ALL_PAGES } from '../src/queries/get-all-pages';
 import { GET_SINGLE_PAGE_BY_ID } from '../src/queries/get-single-page';
 import { useRouter } from 'next/router';
+import DOMPurify from 'isomorphic-dompurify';
+import { isEmpty } from 'lodash';
+import { FALLBACK } from '../src/utils/constants';
 
 function SinglePage({ primaryMenu, footerMenu, sitesettings, pagedata }) {
 	const router = useRouter();
@@ -10,11 +13,18 @@ function SinglePage({ primaryMenu, footerMenu, sitesettings, pagedata }) {
 	if (router.isFallback) {
 		return <div>Loading...</div>;
 	}
+
 	return (
 		<>
 			<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
-				{pagedata?.title}
-				{pagedata?.content}
+				<div className='flex justify-center'>
+					<div className='mb-10 md:my-20 flex flex-col items-center text-primary font-bold md:text-7xl  sm:text-5xl text-4xl '>
+						<p className='front-page-title my-1 md:my-2 '>{pagedata?.title}</p>
+					</div>
+				</div>
+				<div
+					className='content md:max-w-3xl max-w-xl mx-auto px-5'
+					dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pagedata?.content) }}></div>
 			</Layout>
 		</>
 	);
@@ -30,7 +40,12 @@ export async function getStaticProps(context) {
 		variables: { uri: slug.join('/') },
 	});
 
-	console.log(data.page);
+	// page data is null redirect to 404
+	if (isEmpty(data.page) || errors) {
+		return {
+			notFound: true,
+		};
+	}
 
 	return {
 		props: {
@@ -59,6 +74,6 @@ export async function getStaticPaths() {
 
 	return {
 		paths: allpagesUri,
-		fallback: true,
+		fallback: FALLBACK,
 	};
 }
