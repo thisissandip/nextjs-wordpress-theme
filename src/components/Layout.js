@@ -1,9 +1,9 @@
 import Header from './Header';
 
-function Layout({ children, primaryMenu, footerMenu }) {
+function Layout({ children, primaryMenu, footerMenu, title }) {
 	return (
 		<>
-			<Header menu={primaryMenu} />
+			<Header menu={primaryMenu} title={title} />
 			{children}
 		</>
 	);

@@ -36,5 +36,9 @@ export const GET_ALL_MENUS = gql`
 				}
 			}
 		}
+		sitesettings: generalSettings {
+			title
+			description
+		}
 	}
 `;

@@ -8,6 +8,9 @@ module.exports = {
 			primary: {
 				DEFAULT: '#212470',
 			},
+			white: {
+				DEFAULT: '#fff',
+			},
 		},
 		extend: {},
 	},
