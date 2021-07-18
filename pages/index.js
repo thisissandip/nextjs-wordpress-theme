@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Layout from '../src/components/Layout';
 import client from '../src/apollo-client';
-import { GET_ALL_MENUS } from '../src/queries/get-menus';
+import { GET_MENUS_AND_SETTINGS } from '../src/queries/get-menus';
 import { isEmpty } from 'lodash';
 
 export default function Home({ primaryMenu, footerMenu, sitesettings }) {
@@ -27,7 +27,7 @@ export default function Home({ primaryMenu, footerMenu, sitesettings }) {
 
 export const getStaticProps = async () => {
 	const { data, errors } = await client.query({
-		query: GET_ALL_MENUS,
+		query: GET_MENUS_AND_SETTINGS,
 	});
 
 	//  data is null redirect to 404

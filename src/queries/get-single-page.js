@@ -1,51 +1,38 @@
 import { gql } from '@apollo/client';
-import { GET_ALL_MENUS } from './get-menus';
+import { MENU_AND_SETTINGS } from './get-menus';
 
-export const GET_SINGLE_PAGE_BY_ID = gql`
-	query GET_SINGLE_PAGE_BY_ID($uri: String!) {
-		primaryMenu: menus(where: { location: PRIMARY }) {
-			edges {
-				node {
-					id
-					menuItems {
-						edges {
-							node {
-								url
-								menuItemId
-								label
-								path
-							}
-						}
-					}
-				}
-			}
-		}
-		footerMenu: menus(where: { location: FOOTER }) {
-			edges {
-				node {
-					id
-					menuItems {
-						edges {
-							node {
-								url
-								menuItemId
-								label
-								path
-							}
-						}
-					}
-				}
-			}
-		}
-		sitesettings: generalSettings {
-			title
-			description
-		}
+export const GET_SINGLE_PAGE_BY_URI = gql`
+	query GET_SINGLE_PAGE_BY_URI($uri: String!) {
 		page: pageBy(uri: $uri) {
 			content(format: RENDERED)
 			pageId
 			title
 			status
 		}
+		${MENU_AND_SETTINGS}
+	}
+`;
+
+export const GET_SINGLE_PAGE_BY_ID = gql`
+	query GET_SINGLE_PAGE_BY_ID($id: ID!) {
+		page: page(id: $id, idType: DATABASE_ID) {
+			id
+			content(format: RENDERED)
+			title
+			uri
+		}
+		${MENU_AND_SETTINGS}
+	}
+`;
+
+export const GET_SINGLE_POST_BY_ID = gql`
+	query GET_SINGLE_POST_BY_ID($id: ID!) {
+		post: post(id: $id, idType: DATABASE_ID) {
+			id
+			content(format: RENDERED)
+			title
+			uri
+		}
+		${MENU_AND_SETTINGS}
 	}
 `;

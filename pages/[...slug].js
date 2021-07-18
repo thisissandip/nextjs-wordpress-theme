@@ -1,7 +1,7 @@
 import Layout from '../src/components/Layout';
 import client from '../src/apollo-client';
 import { GET_ALL_PAGES } from '../src/queries/get-all-pages';
-import { GET_SINGLE_PAGE_BY_ID } from '../src/queries/get-single-page';
+import { GET_SINGLE_PAGE_BY_URI } from '../src/queries/get-single-page';
 import { useRouter } from 'next/router';
 import DOMPurify from 'isomorphic-dompurify';
 import { isEmpty } from 'lodash';
@@ -36,7 +36,7 @@ export async function getStaticProps(context) {
 	const { slug } = context.params;
 
 	const { data, errors } = await client.query({
-		query: GET_SINGLE_PAGE_BY_ID,
+		query: GET_SINGLE_PAGE_BY_URI,
 		variables: { uri: slug.join('/') },
 	});
 

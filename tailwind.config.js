@@ -7,10 +7,19 @@ module.exports = {
 		colors: {
 			primary: {
 				DEFAULT: '#212470',
+				light: '#4b4fc4',
 			},
 			white: {
 				DEFAULT: '#fff',
 			},
+			transparent: 'transparent',
+			current: 'currentColor',
+			black: colors.black,
+			white: colors.white,
+			gray: colors.trueGray,
+			indigo: colors.indigo,
+			red: colors.rose,
+			yellow: colors.amber,
 		},
 		extend: {},
 	},

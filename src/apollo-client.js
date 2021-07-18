@@ -1,8 +1,29 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+
+const defaultOptions = {
+	watchQuery: {
+		fetchPolicy: 'no-cache',
+		errorPolicy: 'ignore',
+	},
+	query: {
+		fetchPolicy: 'no-cache',
+		errorPolicy: 'all',
+	},
+};
+
+const cache = new InMemoryCache({
+	resultCaching: false,
+});
+
+const link = createHttpLink({
+	uri: `http://localhost/mysite/graphql`,
+});
 
 const client = new ApolloClient({
-	uri: 'http://localhost/mysite/graphql',
-	cache: new InMemoryCache(),
+	connectToDevTools: true,
+	link,
+	cache,
+	defaultOptions,
 });
 
 export default client;
