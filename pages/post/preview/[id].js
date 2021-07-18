@@ -38,6 +38,8 @@ export async function getServerSideProps(context) {
 		},
 	});
 
+	console.log(data);
+
 	//  data is null redirect to 404
 	if (
 		isEmpty(data.primaryMenu) ||
