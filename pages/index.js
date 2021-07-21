@@ -1,10 +1,30 @@
 import Head from 'next/head';
 import Layout from '../src/components/Layout';
 import client from '../src/apollo-client';
-import { GET_MENUS_AND_SETTINGS } from '../src/queries/get-menus';
-import { isEmpty } from 'lodash';
+import Link from 'next/link';
+import Image from 'next/image';
+import { GET_INDEX_PAGE_DATA } from '../src/queries/get-index-data';
+import { first, isEmpty } from 'lodash';
 
-export default function Home({ primaryMenu, footerMenu, sitesettings }) {
+export default function Home({ primaryMenu, footerMenu, sitesettings, firstsix }) {
+	//console.log(firstsix);
+	let firstsixposts = firstsix?.edges.map((edge) => {
+		return (
+			<Link key={edge?.node?.id} href={`/post/${edge?.node?.slug}`}>
+				<div className='post-container inline-block md:mx-8 mx-5 md:mb-6 mb-4 w-80 cursor-pointer text-primary '>
+					<div className='post-image-wrapper '></div>
+					<div
+						className='post-image ease-in h-60 bg-center rounded-lg hover:shadow-2xl transform transition ease'
+						style={{
+							background: `url(${edge?.node.featuredImage?.node?.mediaItemUrl}) center center / cover`,
+						}}></div>
+
+					<div className='post-title cursor-pointer font-bold my-5 mb-4 text-2xl w-50 '>{edge?.node?.title}</div>
+				</div>
+			</Link>
+		);
+	});
+
 	return (
 		<div>
 			<Head>
@@ -13,13 +33,13 @@ export default function Home({ primaryMenu, footerMenu, sitesettings }) {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
-				<div className='flex justify-center bg-primary'>
-					<div className='my-20 flex flex-col items-center text-white font-bold md:text-7xl  sm:text-5xl text-4xl '>
+				<div className='flex md:w-50 ml-12'>
+					<div className='my-20 flex flex-col text-primary font-bold md:text-7xl  sm:text-5xl text-4xl '>
 						<p className='front-page-title my-2 '>NextJS</p>
 						<p className='front-page-title my-2'>WordPress Theme</p>
 					</div>
 				</div>
-				<hr />
+				<div className='latest-blog mx-auto flex flex-wrap justify-center md:my-10 my-5'>{firstsixposts}</div>
 			</Layout>
 		</div>
 	);
@@ -27,7 +47,7 @@ export default function Home({ primaryMenu, footerMenu, sitesettings }) {
 
 export const getStaticProps = async () => {
 	const { data, errors } = await client.query({
-		query: GET_MENUS_AND_SETTINGS,
+		query: GET_INDEX_PAGE_DATA,
 	});
 
 	//  data is null redirect to 404
@@ -42,6 +62,7 @@ export const getStaticProps = async () => {
 			primaryMenu: data.primaryMenu,
 			footerMenu: data.footerMenu,
 			sitesettings: data.sitesettings,
+			firstsix: data.firstsix,
 		},
 		revalidate: 10,
 	};

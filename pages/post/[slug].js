@@ -1,13 +1,13 @@
-import Layout from '../src/components/Layout';
-import client from '../src/apollo-client';
-import { GET_ALL_PAGES } from '../src/queries/get-all-pages';
-import { GET_SINGLE_PAGE_BY_URI } from '../src/queries/get-single-page';
+import { GET_ALL_POSTS } from '../../src/queries/get-all-pages';
+import Layout from '../../src/components/Layout';
+import { GET_SINGLE_POST_BY_SLUG, GET_SINGLE_POST_BY_ID } from '../../src/queries/get-single-page';
 import { useRouter } from 'next/router';
 import DOMPurify from 'isomorphic-dompurify';
+import client from '../../src/apollo-client';
 import { isEmpty } from 'lodash';
-import { FALLBACK } from '../src/utils/constants';
+import { FALLBACK } from '../../src/utils/constants';
 
-function SinglePage({ primaryMenu, footerMenu, sitesettings, pagedata }) {
+function Post({ primaryMenu, footerMenu, sitesettings, postdata }) {
 	const router = useRouter();
 
 	if (router.isFallback) {
@@ -19,29 +19,29 @@ function SinglePage({ primaryMenu, footerMenu, sitesettings, pagedata }) {
 			<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
 				<div className='flex justify-center'>
 					<div className='mb-10 md:my-20 flex flex-col items-center text-primary font-bold md:text-7xl  sm:text-5xl text-4xl '>
-						<p className='front-page-title my-1 md:my-2 '>{pagedata?.title}</p>
+						<p className='front-page-title my-1 md:my-2 '>{postdata?.title}</p>
 					</div>
 				</div>
 				<div
 					className='content md:max-w-3xl max-w-xl mx-auto px-5 mb-20'
-					dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pagedata?.content) }}></div>
+					dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(postdata?.content) }}></div>
 			</Layout>
 		</>
 	);
 }
 
-export default SinglePage;
+export default Post;
 
 export async function getStaticProps(context) {
 	const { slug } = context.params;
 
 	const { data, errors } = await client.query({
-		query: GET_SINGLE_PAGE_BY_URI,
-		variables: { uri: slug.join('/') },
+		query: GET_SINGLE_POST_BY_ID,
+		variables: { id: slug },
 	});
 
-	// page data is null redirect to 404
-	if (isEmpty(data.page) || errors) {
+	// post data is null redirect to 404
+	if (isEmpty(data.post) || errors) {
 		return {
 			notFound: true,
 		};
@@ -52,30 +52,27 @@ export async function getStaticProps(context) {
 			primaryMenu: data.primaryMenu,
 			footerMenu: data.footerMenu,
 			sitesettings: data.sitesettings,
-			pagedata: data.page,
+			postdata: data.post,
 		},
 	};
 }
 
 export async function getStaticPaths() {
 	const { data } = await client.query({
-		query: GET_ALL_PAGES,
+		query: GET_ALL_POSTS,
 	});
 
-	// return all the id's of th page to get the data of each page
-	let allpagesUri =
-		data?.pages?.edges &&
-		data?.pages?.edges.map((page) => {
-			const slugs = page?.node?.uri?.split('/').filter((pageSlug) => pageSlug);
+	let allpostsIds =
+		data?.posts?.edges &&
+		data?.posts?.edges.map((post) => {
+			const id = post?.node?.id;
 			return {
-				params: { slug: slugs },
+				params: { slug: id },
 			};
 		});
 
-	console.log(allpagesUri);
-
 	return {
-		paths: allpagesUri,
+		paths: allpostsIds,
 		fallback: FALLBACK,
 	};
 }

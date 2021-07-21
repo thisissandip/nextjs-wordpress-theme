@@ -27,7 +27,7 @@ export const GET_SINGLE_PAGE_BY_ID = gql`
 
 export const GET_SINGLE_POST_BY_ID = gql`
 	query GET_SINGLE_POST_BY_ID($id: ID!) {
-		post: post(id: $id, idType: DATABASE_ID) {
+		post: post(id: $id, idType: SLUG) {
 			id
 			content(format: RENDERED)
 			title

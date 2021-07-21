@@ -47,7 +47,7 @@ function login({ primaryMenu, footerMenu, sitesettings, isLoggedin }) {
 			<div className='sm:max-w-xl rounded px-8 pt-6 pb-8 mb-4 flex flex-col mx-auto mt-40 md-shadow'>
 				<form>
 					{showInfo ? (
-						<div className='info-container'>
+						<div className='info-container text-center'>
 							<div className='goto'>Preview links:</div>
 							<div className='goto'>To Preview a post goto: /post/preview/[your_post_id]</div>
 							<div className='goto'>To Preview a page goto: /page/preview/[your_page_id]</div>
