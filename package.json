@@ -34,6 +34,7 @@
 		"postcss-import": "^14.0.2",
 		"postcss-preset-env": "^6.7.0",
 		"precss": "^4.0.0",
+		"query-string": "^7.0.1",
 		"tailwindcss": "^2.2.4"
 	}
 }

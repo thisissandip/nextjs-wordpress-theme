@@ -34,9 +34,9 @@ export default function Home({ primaryMenu, footerMenu, sitesettings, firstsix }
 			</Head>
 			<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
 				<div className='flex md:w-50 ml-12'>
-					<div className='my-20 flex flex-col text-primary font-bold md:text-7xl  sm:text-5xl text-4xl '>
-						<p className='front-page-title my-2 '>NextJS</p>
-						<p className='front-page-title my-2'>WordPress Theme</p>
+					<div className='my-20 flex flex-col text-primary font-bold '>
+						<p className='front-page-title my-2 md:text-7xl  sm:text-5xl text-4xl '>NextJS</p>
+						<p className='front-page-title my-2 md:text-7xl  sm:text-5xl text-4xl '>WordPress Theme</p>
 					</div>
 				</div>
 				<div className='latest-blog mx-auto flex flex-wrap justify-center md:my-10 my-5'>{firstsixposts}</div>
