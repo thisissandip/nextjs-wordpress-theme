@@ -42,6 +42,11 @@ function Header({ menu, title }) {
 					<ul
 						id='ulMenu'
 						className='flex flex-col duration-300 ease-out sm:transition-none mt-5 mx-4 md:flex-row md:items-center md:mx-0 md:ml-auto md:mt-0 md:pt-0 md:border-0'>
+						<li className='cursor-pointer'>
+							<Link href={`/blogs`}>
+								<span className='md:p-2 lg:px-4 font-semibold block text-primary px-4 py-1'>Blogs</span>
+							</Link>
+						</li>
 						{primaryMenuItems?.map((item) => (
 							<li className='cursor-pointer' key={item?.menuItemId}>
 								<Link title={item.label} href={`${item?.path}`}>

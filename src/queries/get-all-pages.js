@@ -15,6 +15,20 @@ export const GET_ALL_PAGES = gql`
 	}
 `;
 
+export const GET_ALL_POSTS = gql`
+	query GET_ALL_POSTS {
+		posts(first: ${PAGE_COUNT}) {
+			edges {
+				node {
+					uri
+					slug
+					id
+				}
+			}
+		}
+	}
+`;
+
 export const FIRST_6_POSTS = `
 		firstsix: posts(first: 6) {
 			edges {
@@ -42,19 +56,5 @@ export const FIRST_6_POSTS = `
 export const GET_FIRST_6_POSTS = gql`
 	query GET_FIRST_6_POSTS {
 		${FIRST_6_POSTS}
-	}
-`;
-
-export const GET_ALL_POSTS = gql`
-	query GET_ALL_POSTS {
-		posts(first: ${PAGE_COUNT}) {
-			edges {
-				node {
-					uri
-					slug
-					id
-				}
-			}
-		}
 	}
 `;

@@ -72,8 +72,6 @@ export async function getStaticPaths() {
 			};
 		});
 
-	console.log(allpagesUri);
-
 	return {
 		paths: allpagesUri,
 		fallback: FALLBACK,
