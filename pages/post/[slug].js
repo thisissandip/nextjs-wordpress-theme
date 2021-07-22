@@ -18,13 +18,13 @@ function Post({ primaryMenu, footerMenu, sitesettings, postdata }) {
 		<>
 			<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
 				<div className='flex justify-center'>
-					<div className='mb-10 md:my-20 flex flex-col items-center text-primary font-bold md:text-7xl  sm:text-5xl text-4xl '>
-						<p className='front-page-title my-1 md:my-2 '>{postdata?.title}</p>
+					<div className='mb-10 md:my-20 flex flex-col items-center text-primary font-bold '>
+						<p className='front-page-title my-1 md:my-2 md:text-7xl  sm:text-5xl text-4xl'>{postdata?.title}</p>
 					</div>
 				</div>
 				<div
 					className='content md:max-w-3xl max-w-xl mx-auto px-5 mb-20'
-					dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(postdata?.content) }}></div>
+					dangerouslySetInnerHTML={{ __html: postdata?.content }}></div>
 			</Layout>
 		</>
 	);
@@ -36,7 +36,7 @@ export async function getStaticProps(context) {
 	const { slug } = context.params;
 
 	const { data, errors } = await client.query({
-		query: GET_SINGLE_POST_BY_ID,
+		query: GET_SINGLE_POST_BY_SLUG,
 		variables: { id: slug },
 	});
 

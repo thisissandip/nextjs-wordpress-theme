@@ -2,4 +2,47 @@
 @import '~tailwindcss/components';
 @import '~tailwindcss/utilities';
 
-@import "./nprogressstyles";
+@import './nprogressstyles';
+
+@import '~@wordpress/base-styles/colors';
+@import '~@wordpress/base-styles/variables';
+@import '~@wordpress/base-styles/mixins';
+@import '~@wordpress/base-styles/breakpoints';
+@import '~@wordpress/base-styles/animations';
+@import '~@wordpress/base-styles/z-index';
+@import '~@wordpress/block-library/src/style.scss';
+@import '~@wordpress/block-library/src/theme.scss';
+
+/* Your own custom utilities */
+
+p {
+	@apply text-lg leading-relaxed mt-0 mb-4;
+	a {
+		color: rgb(89, 10, 162);
+		text-decoration: underline;
+	}
+}
+
+h1 {
+	@apply text-6xl font-normal mt-0 mb-2 leading-normal;
+}
+
+h2 {
+	@apply text-5xl font-normal mt-0 mb-2 leading-normal;
+}
+
+h3 {
+	@apply text-4xl font-normal mt-0 mb-2 leading-normal;
+}
+
+h4 {
+	@apply text-3xl font-normal mt-0 mb-2 leading-normal;
+}
+
+h5 {
+	@apply text-2xl font-normal mt-0 mb-2 leading-normal;
+}
+
+h6 {
+	@apply text-xl font-normal mt-0 mb-2 leading-normal;
+}
