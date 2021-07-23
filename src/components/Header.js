@@ -41,6 +41,12 @@ function Header({ menu, title }) {
 		}
 	};
 
+	const handleKeyUp = (e) => {
+		if (e.keyCode === 13) {
+			handleSearch();
+		}
+	};
+
 	return (
 		<nav id='nav' className='bg-white border-0 border-b-2' role='navigation'>
 			<div className='container overflow-hidden mx-auto p-4 flex justify-between flex-wrap  items-center md:flex-no-wrap'>
@@ -84,6 +90,7 @@ function Header({ menu, title }) {
 									value={searchtext}
 									onChange={(e) => setSearchText(e.target.value)}
 									placeholder='Search...'
+									onKeyUp={(e) => handleKeyUp(e)}
 								/>
 								<button onClick={() => handleSearch()} className='flex items-center justify-center px-4 border-l'>
 									<svg

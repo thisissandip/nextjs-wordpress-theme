@@ -34,6 +34,7 @@ footerMenu: menus(where: { location: FOOTER }) {
 		}
 	}
 }
+
 sitesettings: generalSettings {
 	title
 	description

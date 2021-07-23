@@ -32,7 +32,11 @@ export default function Home({ primaryMenu, footerMenu, sitesettings, firstsix }
 				<meta name='description' content={sitesettings?.description} />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
+			<Layout
+				primaryMenu={primaryMenu}
+				footerMenu={footerMenu}
+				title={sitesettings?.title}
+				tagline={sitesettings?.description}>
 				<div className='flex md:w-50 ml-12'>
 					<div className='my-20 flex flex-col text-primary font-bold '>
 						<p className='front-page-title my-2 md:text-7xl  sm:text-5xl text-4xl '>NextJS</p>

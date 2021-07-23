@@ -16,7 +16,11 @@ function SinglePage({ primaryMenu, footerMenu, sitesettings, pagedata }) {
 
 	return (
 		<>
-			<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
+			<Layout
+				primaryMenu={primaryMenu}
+				footerMenu={footerMenu}
+				title={sitesettings?.title}
+				tagline={sitesettings?.description}>
 				<div className='flex justify-center'>
 					<div className='mb-10 md:my-20 flex flex-col items-center text-primary font-bold md:text-7xl  sm:text-5xl text-4xl '>
 						<p className='front-page-title my-1 md:my-2 '>{pagedata?.title}</p>

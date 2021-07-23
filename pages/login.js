@@ -43,7 +43,11 @@ function login({ primaryMenu, footerMenu, sitesettings, isLoggedin }) {
 	};
 
 	return (
-		<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
+		<Layout
+			primaryMenu={primaryMenu}
+			footerMenu={footerMenu}
+			title={sitesettings?.title}
+			tagline={sitesettings?.description}>
 			<div className='sm:max-w-xl rounded px-8 pt-6 pb-8 mb-4 flex flex-col mx-auto mt-40 md-shadow'>
 				<form>
 					{showInfo ? (

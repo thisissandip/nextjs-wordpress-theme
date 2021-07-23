@@ -50,7 +50,11 @@ export default function Blogs({ primaryMenu, footerMenu, sitesettings, posts, pa
 				<meta name='description' content={sitesettings?.description} />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
+			<Layout
+				primaryMenu={primaryMenu}
+				footerMenu={footerMenu}
+				title={sitesettings?.title}
+				tagline={sitesettings?.description}>
 				<div className='latest-blog mx-auto flex flex-wrap justify-center md:mt-10 mt-5 mb-3'>{blogstodisplay}</div>
 				{hasnext ? (
 					loading ? (

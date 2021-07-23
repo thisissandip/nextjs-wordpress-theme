@@ -54,7 +54,11 @@ export default function Search({ primaryMenu, footerMenu, sitesettings }) {
 				<meta name='description' content={sitesettings?.description} />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
+			<Layout
+				primaryMenu={primaryMenu}
+				footerMenu={footerMenu}
+				title={sitesettings?.title}
+				tagline={sitesettings?.description}>
 				<div className='latest-blog mx-auto flex flex-wrap justify-center md:my-10 my-5'>
 					{allposts?.map((edge, i) => (
 						<PostCard key={i} edge={edge} />
