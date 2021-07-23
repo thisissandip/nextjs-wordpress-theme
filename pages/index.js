@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { GET_INDEX_PAGE_DATA } from '../src/queries/get-index-data';
 import { first, isEmpty } from 'lodash';
+import { NextSeo } from 'next-seo';
 
 export default function Home({ primaryMenu, footerMenu, sitesettings, firstsix }) {
 	//console.log(firstsix);
@@ -25,8 +26,12 @@ export default function Home({ primaryMenu, footerMenu, sitesettings, firstsix }
 		);
 	});
 
+	const currentLocation = typeof window !== 'undefined' ? window.location.href : null;
+	const opengraphUrl = process.env.NEXTJS_SITE_URL ? process.env.NEXTJS_SITE_URL : currentLocation;
+
 	return (
 		<div>
+			<NextSeo title={sitesettings?.title} description={sitesettings?.description} canonical={opengraphUrl} />
 			<Head>
 				<title>{sitesettings?.title}</title>
 				<meta name='description' content={sitesettings?.description} />

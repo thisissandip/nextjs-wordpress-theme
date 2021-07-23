@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 import { MENU_AND_SETTINGS } from './get-menus';
+import { SEO } from './seo-fragment';
 
 export const GET_SINGLE_PAGE_BY_URI = gql`
 	query GET_SINGLE_PAGE_BY_URI($uri: String!) {
@@ -8,6 +9,7 @@ export const GET_SINGLE_PAGE_BY_URI = gql`
 			pageId
 			title
 			status
+			${SEO}
 		}
 		${MENU_AND_SETTINGS}
 	}
@@ -20,6 +22,7 @@ export const GET_SINGLE_PAGE_BY_ID = gql`
 			content(format: RENDERED)
 			title
 			uri
+			${SEO}
 		}
 		${MENU_AND_SETTINGS}
 	}
@@ -32,6 +35,7 @@ export const GET_SINGLE_POST_BY_SLUG = gql`
 			content(format: RENDERED)
 			title
 			uri
+			${SEO}
 		}
 		${MENU_AND_SETTINGS}
 	}
@@ -44,6 +48,7 @@ export const GET_SINGLE_POST_BY_ID = gql`
 			content(format: RENDERED)
 			title
 			uri
+			${SEO}
 		}
 		${MENU_AND_SETTINGS}
 	}
