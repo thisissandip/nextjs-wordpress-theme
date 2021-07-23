@@ -1,30 +1,14 @@
 import Head from 'next/head';
 import Layout from '../src/components/Layout';
 import client from '../src/apollo-client';
-import Link from 'next/link';
-import Image from 'next/image';
 import { GET_INDEX_PAGE_DATA } from '../src/queries/get-index-data';
 import { first, isEmpty } from 'lodash';
 import { NextSeo } from 'next-seo';
+import PostCard from '../src/components/PostCard';
 
 export default function Home({ primaryMenu, footerMenu, sitesettings, firstsix }) {
 	//console.log(firstsix);
-	let firstsixposts = firstsix?.edges.map((edge) => {
-		return (
-			<Link key={edge?.node?.id} href={`/post/${edge?.node?.slug}`}>
-				<div className='post-container inline-block md:mx-8 mx-5 md:mb-6 mb-4 w-80 cursor-pointer text-primary '>
-					<div className='post-image-wrapper '></div>
-					<div
-						className='post-image ease-in h-60 bg-center rounded-lg hover:shadow-2xl transform transition ease'
-						style={{
-							background: `url(${edge?.node.featuredImage?.node?.mediaItemUrl}) center center / cover`,
-						}}></div>
-
-					<div className='post-title cursor-pointer font-bold my-5 mb-4 text-2xl w-50 '>{edge?.node?.title}</div>
-				</div>
-			</Link>
-		);
-	});
+	let firstsixposts = firstsix?.edges.map((edge, i) => <PostCard key={i} edge={edge} />);
 
 	const currentLocation = typeof window !== 'undefined' ? window.location.href : null;
 	const opengraphUrl = process.env.NEXTJS_SITE_URL ? process.env.NEXTJS_SITE_URL : currentLocation;

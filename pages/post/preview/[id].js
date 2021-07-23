@@ -8,8 +8,19 @@ import { getToken } from '../../../src/utils/cookiesNredirects';
 function PostPreview({ primaryMenu, footerMenu, sitesettings, post }) {
 	const router = useRouter();
 	return (
-		<Layout primaryMenu={primaryMenu} footerMenu={footerMenu} title={sitesettings?.title}>
-			{post?.title}
+		<Layout
+			primaryMenu={primaryMenu}
+			footerMenu={footerMenu}
+			title={sitesettings?.title}
+			tagline={sitesettings?.description}>
+			<div className='flex justify-center'>
+				<div className='mb-10 md:my-20 flex flex-col items-center text-primary font-bold '>
+					<p className='front-page-title my-1 md:my-2 md:text-7xl  sm:text-5xl text-4xl'>{post?.title}</p>
+				</div>
+			</div>
+			<div
+				className='content md:max-w-3xl max-w-xl mx-auto px-5 mb-20'
+				dangerouslySetInnerHTML={{ __html: post?.content }}></div>
 		</Layout>
 	);
 }
@@ -37,8 +48,6 @@ export async function getServerSideProps(context) {
 			authorization: authToken ? `Bearer ${authToken}` : '',
 		},
 	});
-
-	console.log(data);
 
 	//  data is null redirect to 404
 	if (

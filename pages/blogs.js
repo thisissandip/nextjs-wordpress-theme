@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { GET_FIRST_NINE_BLOGS, GET_MORE_BLOGS } from '../src/queries/get-blogs';
 import { first, isEmpty } from 'lodash';
 import { useLazyQuery } from '@apollo/client';
+import PostCard from '../src/components/PostCard';
 import { useEffect, useState } from 'react';
 
 export default function Blogs({ primaryMenu, footerMenu, sitesettings, posts, pageinfo }) {
@@ -13,22 +14,7 @@ export default function Blogs({ primaryMenu, footerMenu, sitesettings, posts, pa
 	const [endCursor, serEndCursor] = useState(pageinfo.endCursor);
 	const [hasnext, setHasNext] = useState(pageinfo.hasNextPage);
 
-	let blogstodisplay = allposts?.map((edge) => {
-		return (
-			<Link key={edge?.node?.id} href={`/post/${edge?.node?.slug}`}>
-				<div className='post-container inline-block md:mx-8 mx-5 md:mb-6 mb-4 w-80 cursor-pointer text-primary '>
-					<div className='post-image-wrapper '></div>
-					<div
-						className='post-image ease-in h-60 bg-center rounded-lg hover:shadow-2xl transform transition ease'
-						style={{
-							background: `url(${edge?.node.featuredImage?.node?.mediaItemUrl}) center center / cover`,
-						}}></div>
-
-					<div className='post-title cursor-pointer font-bold my-5 mb-4 text-2xl w-50 '>{edge?.node?.title}</div>
-				</div>
-			</Link>
-		);
-	});
+	let blogstodisplay = allposts?.map((edge, i) => <PostCard key={i} edge={edge} />);
 
 	// Load More Lazy Query
 

@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import Layout from '../src/components/Layout';
 import client from '../src/apollo-client';
-import Link from 'next/link';
-import Image from 'next/image';
 import { GET_MENUS_AND_SETTINGS } from '../src/queries/get-menus';
 import { first, isEmpty } from 'lodash';
 import PostCard from '../src/components/PostCard';

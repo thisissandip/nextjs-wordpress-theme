@@ -15,6 +15,7 @@ export const GET_SINGLE_PAGE_BY_URI = gql`
 	}
 `;
 
+// for preview
 export const GET_SINGLE_PAGE_BY_ID = gql`
 	query GET_SINGLE_PAGE_BY_ID($id: ID!) {
 		page: page(id: $id, idType: DATABASE_ID) {
@@ -41,6 +42,7 @@ export const GET_SINGLE_POST_BY_SLUG = gql`
 	}
 `;
 
+// for preview
 export const GET_SINGLE_POST_BY_ID = gql`
 	query GET_SINGLE_POST_BY_ID($id: ID!) {
 		post: post(id: $id, idType: DATABASE_ID) {
@@ -48,7 +50,6 @@ export const GET_SINGLE_POST_BY_ID = gql`
 			content(format: RENDERED)
 			title
 			uri
-			${SEO}
 		}
 		${MENU_AND_SETTINGS}
 	}
